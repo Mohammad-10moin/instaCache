@@ -1,12 +1,12 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import { UserModel } from "./db.js";
-
+import { ContentModel, UserModel } from "./db.js";
+import { jwtpswd } from "./config.js";
+import { userMiddleware } from "./middleware.js";
 const app = express();
 app.use(express.json());
 
-const jwtpswd="password";
 
 app.post("/signup",async(req,res)=>{
     const username = req.body.username;
@@ -51,12 +51,38 @@ app.post("/signin",async(req,res)=>{
     }
 })
 
-app.post("/content",(req,res)=>{
+app.post("/content",userMiddleware,async(req,res)=>{
+    const title = req.body.title;
+    const link = req.body.link;
 
+    await ContentModel.create({
+        title:title,
+        link:link,
+        // @ts-ignore
+        userId:req.userId,
+        tags: []
+    })
+    res.json({
+        msg:"Content added"
+    })
 })
 
-app.get("/content",(req,res)=>{
-
+app.get("/content",userMiddleware,async(req,res)=>{
+    // @ts-ignore
+    const userId=req.userId;
+    const contentfound= await ContentModel.find({
+        userId:userId
+    }).populate("userId","username")
+    if(contentfound){
+        res.json({
+            contentfound
+        })
+    }
+    else{
+        res.json({
+            msg:"NO content found"
+        })
+    }
 })
 
 app.post("/brain/share",(req,res)=>{
