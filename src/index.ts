@@ -54,10 +54,12 @@ app.post("/signin",async(req,res)=>{
 app.post("/content",userMiddleware,async(req,res)=>{
     const title = req.body.title;
     const link = req.body.link;
+    const type = req.body.type;
 
     await ContentModel.create({
         title:title,
         link:link,
+        type:type,
         // @ts-ignore
         userId:req.userId,
         tags: []
@@ -102,7 +104,8 @@ app.post("/brain/share",userMiddleware,async(req,res)=>{
 
     if(link){
         res.status(200).json({
-            msg: "Brain shared successfully"
+            msg: "Brain shared successfully",
+            shareLinkUrl
         })
     }
     else{
