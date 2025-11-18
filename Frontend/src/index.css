@@ -1,4 +1,12 @@
 @import "tailwindcss";
+
+@theme {
+  --color-purple-600 : #4f45e3;
+  --color-purple-400 : #dfe6fd;
+  --color-purple-500 : #7671cc;
+}
+
+/*
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -67,3 +75,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+*/
