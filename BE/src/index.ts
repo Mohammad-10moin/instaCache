@@ -11,14 +11,23 @@ app.post("/signup",async(req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
 
-    await userModel.create({
-        username:username,
-        password:password
+    const found = await userModel.find({
+        username:username
     })
-
-    res.json({
-        msg:"user signed up"
-    })
+    if(found){
+        return res.json({
+            msg:"user already exists"
+        })
+    }else{
+        await userModel.create({
+            username:username,
+            password:password
+        })
+    
+        res.json({
+            msg:"user signed up"
+        })
+    }
 })
 
 app.post("/signin",async(req,res)=>{
@@ -100,14 +109,24 @@ app.post("/share",userMiddleware,async(req,res)=>{
     const share = req.body.share;
     if(share){
         const randomlink = nanoid(10);
-        await linkmodel.create({
-            // hash:randomhash(10),
-            hash:randomlink,
+        const linkfound= await linkmodel.findOne({
             userid:req.userId
         })
-        res.json({
-            link:randomlink
-        })
+        if(linkfound){
+            return res.json({
+                msg:"link already exists",
+                link:linkfound.hash,
+            })
+        }else{
+            await linkmodel.create({
+                // hash:randomhash(10),
+                hash:randomlink,
+                userid:req.userId
+            })
+            res.json({
+                link:randomlink
+            })
+        }
     }else{
         await linkmodel.deleteOne({
             userid:req.userId

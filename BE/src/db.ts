@@ -7,10 +7,10 @@ mongoose.connect(dburl);
 
 
 import {Schema , model} from "mongoose";
-import { object } from "zod";
+
 const UserSchema=new Schema({
-    username: {type:String, unique:true},
-    password: String
+    username: {type:String, unique:true,required:true},
+    password: {type:String,required:true}
 });
 
 export const userModel = model("User",UserSchema);
