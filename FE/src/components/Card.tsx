@@ -8,7 +8,7 @@ interface Cardprops{
 }
 export function Card({title,link,type}:Cardprops){
     return <div>
-        <div className="p-4 bg-white rounded-md border-gray-200 max-w-72 border min-h-48 min-w-72">
+        <div className="p-4 bg-white rounded-md border-gray-200 max-w-72 border min-h-56 min-w-72">
             <div className="flex justify-between items-center">
                 <div className="flex items-center">
                     <div className="pr-2 text-gray-500">{<Plusicon/>}</div>
