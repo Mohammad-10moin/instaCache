@@ -17,7 +17,7 @@ function App() {
           <Button onClick={()=>{setContent(true)}} variant="secondary" text="add Content" StartIcon={<Plusicon/>}></Button>
         </div>
         <div className='flex gap-4'>
-          <Card title="Nasheed" link='https://www.youtube.com/watch?v=21WaGYBlb9M' type='youtube'/>
+          <Card title="Youtube" link='https://www.youtube.com/watch?v=21WaGYBlb9M' type='youtube'/>
           <Card title="tweet" link='https://x.com/im10Moin/status/1960411425081581991?s=20' type='twitter'/>
         </div>
         <CreateContent open={addContent} onclose={()=>{setContent(false)}}/>

@@ -12,7 +12,7 @@ const variantClass={
     "secondary":"bg-brainly-lightblue text-brainly-blue"
 }
 
-const defaultStyles="px-4 py-2 rounded-md font-light flex items-center cursor-pointer";
+const defaultStyles="px-4 py-2 rounded-md font-light flex items-center cursor-pointer border";
 export function Button({variant,text,StartIcon,onClick}:ButtonProps){
     return <button onClick={onClick} className= {`${variantClass[variant]} ${defaultStyles} `}>
         <div className="px-1 ">{StartIcon}</div>
