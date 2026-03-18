@@ -4,14 +4,17 @@ import { contentModel, linkmodel, userModel } from "./db.js";
 import { userMiddleware } from "./middleware.js";
 import { nanoid } from "nanoid";
 import { randomhash } from "./utils.js";
+import cors from "cors";
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 
 app.post("/signup",async(req,res)=>{
     const username = req.body.username;
     const password = req.body.password;
 
-    const found = await userModel.find({
+    const found = await userModel.findOne({
         username:username
     })
     if(found){
