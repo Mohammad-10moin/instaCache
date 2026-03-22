@@ -4,7 +4,7 @@ import { ShareIcon } from "../icons/shareicon";
 interface Cardprops{
     title:string,
     link:string,
-    type:"twitter"|"youtube"
+    type:string
 }
 export function Card({title,link,type}:Cardprops){
     return <div>

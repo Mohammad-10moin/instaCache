@@ -5,9 +5,11 @@ import { Card } from '../components/Card'
 import { CreateContent } from '../components/Add'
 import { useState } from 'react'
 import { Sidebar } from '../components/Sidebar'
+import { useContent } from '../hooks/useContent'
 
 function Dashboard(){
-const [addContent, setContent]=useState(false);
+  const [addContent, setContent]=useState(false);
+  const contents= useContent();
   return (
     <div>
       <Sidebar/>
@@ -17,8 +19,9 @@ const [addContent, setContent]=useState(false);
           <Button onClick={()=>{setContent(true)}} variant="secondary" text="add Content" StartIcon={<Plusicon/>}></Button>
         </div>
         <div className='flex gap-4'>
-          <Card title="Youtube" link='https://www.youtube.com/watch?v=21WaGYBlb9M' type='youtube'/>
-          <Card title="tweet" link='https://x.com/im10Moin/status/1960411425081581991?s=20' type='twitter'/>
+          {contents?.map((items:any)=>
+            <Card key={items.link} title={items.title} link={items.link} type={items.type}/>
+          )}
         </div>
         <CreateContent open={addContent} onclose={()=>{setContent(false)}}/>
       </div>   
