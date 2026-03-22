@@ -17,9 +17,15 @@ export function Signin(){
             username,
             password
         })
-        const token = res.data.token;
-        localStorage.setItem("token",token);
-        navigate("/home");
+        if(res.data){
+            console.log(res.data);
+            const token = res.data.token;
+            localStorage.setItem("token",token);
+            console.log("Stored token:", localStorage.getItem("token"));
+            navigate("/home");
+        }else {
+            alert("Token not received");
+        }
     }
     return <div className="h-screen w-screen flex justify-center items-center bg-brainly-grey">
         <div className="bg-white p-8 rounded-2xl ">
